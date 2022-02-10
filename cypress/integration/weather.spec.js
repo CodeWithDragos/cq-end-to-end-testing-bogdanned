@@ -20,41 +20,7 @@ describe("The Weather App", () => {
       },
       {
         statusCode: 200,
-        body: {
-          coord: { lon: 13.4105, lat: 52.5244 },
-          weather: [
-            {
-              id: 802,
-              main: "Clouds",
-              description: "scattered clouds",
-              icon: "03d",
-            },
-          ],
-          base: "stations",
-          main: {
-            temp: 8.57,
-            feels_like: 6.71,
-            temp_min: 7.23,
-            temp_max: 10.01,
-            pressure: 1008,
-            humidity: 83,
-          },
-          visibility: 10000,
-          wind: { speed: 3.13, deg: 180 },
-          clouds: { all: 40 },
-          dt: 1644482760,
-          sys: {
-            type: 2,
-            id: 2011538,
-            country: "DE",
-            sunrise: 1644474770,
-            sunset: 1644509309,
-          },
-          timezone: 3600,
-          id: 2950159,
-          name: "Berlin",
-          cod: 200,
-        },
+        fixture: "berlin-weather",
       }
     ).as("api-request");
     cy.visit("http://localhost:3000/weather.html");
@@ -62,13 +28,12 @@ describe("The Weather App", () => {
 
   describe("Given a city", () => {
     it("returns the right temperature", () => {
-
       // type a city
       cy.get("[data-cy=input-search]").clear().type("Berlin{enter}")
       // wait for the response
       cy.waitFor("@api-request")
       // check that the weather is displayed correctly
-      cy.get('[data-cy=container-temp]').should("contain.text", "8.57")
+      cy.get('[data-cy=container-temp]').should("contain.text", "8.81")
     });
   });
 });
