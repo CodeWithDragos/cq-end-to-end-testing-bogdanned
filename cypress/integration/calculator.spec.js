@@ -68,6 +68,7 @@ describe("The Calculator", () => {
     });
   });
 
+
   describe("When two positive numbers have the same value", () => {
     it("the multiplication of both is correct", () => {
       cy.get("[data-cy=btn-five]").click();
@@ -86,4 +87,25 @@ describe("The Calculator", () => {
       cy.get("[data-cy=result]").should("have.text", "0");
     });
   });
+
+  describe("When computing complex operations", () => {
+    it("10+10/10-10 should return -8", () => {
+      cy.get("[data-cy=btn-one]").click();
+      cy.get("[data-cy=btn-zero]").click();
+      cy.get("[data-cy=btn-plus]").click();
+      cy.get("[data-cy=btn-one]").click();
+      cy.get("[data-cy=btn-zero]").click();
+      cy.get("[data-cy=btn-equals]").click();
+      cy.get("[data-cy=btn-divide]").click();
+      cy.get("[data-cy=btn-one]").click();
+      cy.get("[data-cy=btn-zero]").click();
+      cy.get("[data-cy=btn-equals]").click();
+      cy.get("[data-cy=btn-minus]").click();
+      cy.get("[data-cy=btn-one]").click();
+      cy.get("[data-cy=btn-zero]").click();
+      cy.get("[data-cy=btn-equals]").click();
+      cy.get("[data-cy=result]").should("have.text", "-8");
+    });
+  });
+
 });
